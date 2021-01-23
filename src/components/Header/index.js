@@ -16,12 +16,12 @@ const Header = () => {
         <ul className="header-right">
           <li>
             <Link to="/">
-              <AiOutlineHeart size={40} color="#fff" />
+              <AiOutlineHeart size={35} color="#fff" />
             </Link>
           </li>
           <li>
             <Link to="/item/1">
-              <AiOutlineShoppingCart size={40} color="#fff" />
+              <AiOutlineShoppingCart size={35} color="#fff" />
             </Link>
           </li>
           <li>

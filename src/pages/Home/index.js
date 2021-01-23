@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import Button from "../../components/Button";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -52,22 +54,34 @@ const Home = () => {
 
   return (
     <main className="main">
-      <h1 className="title">Our Pokémon</h1>
-      <ul style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-        {data === null
-          ? null
-          : data.map((item) => (
-              <Card key={item.name} data={item} addCart={addCart} />
-            ))}
-      </ul>
-      <button
-        onClick={() => getPreviousData()}
-        disabled={previousUrl === null ? true : false}
-      >
-        voltar
-      </button>
-      <button onClick={() => getNextData()}>proximo</button>
-      <div>{cart !== null ? cart.map((i) => <li>{i.name}</li>) : null}</div>
+      <div class="main-content">
+        <h1 className="title">Our Pokémon</h1>
+        <section className="cards">
+          {data === null
+            ? null
+            : data.map((item) => (
+                <Card key={item.name} data={item} addCart={addCart} />
+              ))}
+        </section>
+        <section className="main-buttons">
+          <Button
+            label={<IoIosArrowBack color="#fff" size={24} />}
+            onClick={() => getPreviousData()}
+            type="shortIcon"
+            disabled={previousUrl === null ? true : false}
+          />
+          <Button
+            label={<IoIosArrowForward color="#fff" size={24} />}
+            onClick={() => getNextData()}
+            type="shortIcon"
+            disabled={false}
+          />
+        </section>
+
+        {/*   <button disabled={previousUrl === null ? true : false}>voltar</button>
+        <button onClick={() => getNextData()}>proximo</button>
+        <div>{cart !== null ? cart.map((i) => <li>{i.name}</li>) : null}</div> */}
+      </div>
     </main>
   );
 };
@@ -86,6 +100,7 @@ const Card = ({ data, addCart }) => {
       })
       .catch((error) => console.log(error));
   }, [url]);
+  console.log(pokemon);
 
   function handleClick() {
     let data = {
@@ -98,17 +113,33 @@ const Card = ({ data, addCart }) => {
   }
 
   return (
-    <div>
+    <>
       {pokemon === null ? null : (
-        <>
+        <div className="card">
           <img
             src={pokemon.sprites.other["official-artwork"].front_default}
-            alt="dfddf"
+            alt=""
+            className="card-image"
           />
-          <h1>{pokemon.name}</h1>
-          <button onClick={handleClick}> Add</button>
-        </>
+          <div className="card-info">
+            <h2>{pokemon.name}</h2>
+            <div class="types">
+              {pokemon.types.map((type) => (
+                <span>{type.type.name}</span>
+              ))}
+            </div>
+
+            <h3>R$2000,00</h3>
+          </div>
+          <div class="card-overlay">
+            <Button
+              label="Adicionar ao carrinho"
+              onClick={handleClick}
+              type="primmary"
+            />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };

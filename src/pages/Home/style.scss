@@ -1,13 +1,118 @@
 .main {
-  padding-top: 125px;
+  width: 100%;
+  padding: 125px 100px 0;
   text-align: center;
+
+  &-content {
+    width: 100%;
+    height: 100%;
+    max-width: 1236px;
+    margin: 0 auto;
+  }
 
   .title {
     color: $BLACK;
     font-size: 40px;
     font-weight: 700;
     line-height: 48px;
-
     margin: 35px 0;
+  }
+
+  .cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
+    grid-auto-flow: row;
+    gap: 32px;
+  }
+
+  .card {
+    position: relative;
+    height: 445px;
+    padding-top: 20%;
+    background-color: $GRAY-2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &-image {
+      width: 80%;
+    }
+
+    &-info {
+      width: 100%;
+      height: 145px;
+      padding: 20px;
+      background-color: $RED;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      h2 {
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        font-size: 24px;
+        text-transform: capitalize;
+        color: $WHITE;
+      }
+
+      .types {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 10px;
+        text-transform: capitalize;
+        color: $RED;
+        background-color: $WHITE;
+        padding: 2px 4px;
+        border-radius: 5px;
+        margin: 0 5px 5px 0;
+      }
+
+      h3 {
+        font-size: 20px;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: $WHITE;
+        margin-top: 10px;
+      }
+    }
+
+    &-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      background-color: rgba($BLACK, 0.67);
+
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover {
+      .card-overlay {
+        display: flex;
+      }
+    }
+  }
+
+  .main-buttons {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
