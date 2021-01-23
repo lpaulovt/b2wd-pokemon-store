@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  font-family: "Poppins", sans-serif;
+}
+
+/*  APP COLOR SCHEMA */
+
+$WHITE: #fff;
+$BLACK: #12121d;
+$GRAY: #d0d0d1;
+$RED: #cd121f;
+$BLUE: #0008c7;
+$GREEN: #42d70d;
