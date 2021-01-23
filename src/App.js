@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes";
-import "./global.scss";
 import Header from "./components/Header";
+import "./global.scss";
 
 function App() {
   return (

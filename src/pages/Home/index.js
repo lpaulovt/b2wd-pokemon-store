@@ -6,6 +6,7 @@ const Home = () => {
   const [nextUrl, setNextUrl] = useState("");
   const [previousUrl, setPreviousUrl] = useState("");
   const [cart, setCart] = useState([]);
+
   useEffect(() => {
     api
       .get(`pokemon`)
@@ -50,8 +51,8 @@ const Home = () => {
   }
 
   return (
-    <div>
-      Home
+    <main className="main">
+      <h1 className="title">Our Pokémon</h1>
       <ul style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         {data === null
           ? null
@@ -67,7 +68,7 @@ const Home = () => {
       </button>
       <button onClick={() => getNextData()}>proximo</button>
       <div>{cart !== null ? cart.map((i) => <li>{i.name}</li>) : null}</div>
-    </div>
+    </main>
   );
 };
 
@@ -84,7 +85,7 @@ const Card = ({ data, addCart }) => {
         setPokemon(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [url]);
 
   function handleClick() {
     let data = {
@@ -95,7 +96,7 @@ const Card = ({ data, addCart }) => {
 
     addCart(data);
   }
-  const world = "official-artwork";
+
   return (
     <div>
       {pokemon === null ? null : (

@@ -7,15 +7,24 @@
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-
   font-family: "Poppins", sans-serif;
 }
 
 /*  APP COLOR SCHEMA */
-
 $WHITE: #fff;
 $BLACK: #12121d;
 $GRAY: #d0d0d1;
 $RED: #cd121f;
 $BLUE: #0008c7;
 $GREEN: #42d70d;
+
+/* PAGES */
+@import "./pages/Home/style.scss";
+@import "./pages/Item/style.scss";
+
+/* COMPONENTS */
+@import "./components/Header/style.scss";
+@import "./components/Footer/style.scss";
+@import "./components/CardPokemon/style.scss";
+@import "./components/Input/style.scss";
+@import "./components/Button/style.scss";
