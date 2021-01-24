@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import Button from "../Button";
+import getRandomInteger from "../../utils/getRandomInteger";
 
 const Card = ({ data, addCart }) => {
   const url = data.url;
   const [pokemon, setPokemon] = useState(null);
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     api
@@ -13,14 +15,18 @@ const Card = ({ data, addCart }) => {
         setPokemon(response.data);
       })
       .catch((error) => console.log(error));
+
+    setPrice(getRandomInteger(1000, 2000));
   }, [url]);
-  console.log(pokemon);
 
   function handleClick() {
     let data = {
       id: pokemon.id,
+      count: 1,
       name: pokemon.name,
+      types: pokemon.types,
       img: pokemon.sprites.other["official-artwork"].front_default,
+      price: price,
     };
 
     addCart(data);
@@ -37,15 +43,15 @@ const Card = ({ data, addCart }) => {
           />
           <div className="card-info">
             <h2>{pokemon.name}</h2>
-            <div class="types">
+            <div className="types">
               {pokemon.types.map((type) => (
-                <span>{type.type.name}</span>
+                <span key={type.type.name}>{type.type.name}</span>
               ))}
             </div>
 
-            <h3>R$2000,00</h3>
+            <h3>R${price}</h3>
           </div>
-          <div class="card-overlay">
+          <div className="card-overlay">
             <Button
               label="Adicionar ao carrinho"
               onClick={handleClick}

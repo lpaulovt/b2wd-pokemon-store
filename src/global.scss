@@ -19,6 +19,9 @@ $RED: #cd121f;
 $BLUE: #0008c7;
 $GREEN: #42d70d;
 
+/* MAX WIDTH*/
+$MAXWIDTH: 1250px;
+
 /* PAGES */
 @import "./pages/Home/style.scss";
 @import "./pages/Item/style.scss";
@@ -27,5 +30,6 @@ $GREEN: #42d70d;
 @import "./components/Header/style.scss";
 @import "./components/Footer/style.scss";
 @import "./components/Card/style.scss";
+@import "./components/Cart/style.scss";
 @import "./components/Input/style.scss";
 @import "./components/Button/style.scss";

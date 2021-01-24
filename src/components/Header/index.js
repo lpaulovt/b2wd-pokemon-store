@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import InputIcon from "../Input";
 
-const Header = () => {
+const Header = ({ isOpenCart, setIsOpenCart }) => {
   return (
     <header className="header">
       <div className="header-content">
@@ -20,9 +20,9 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/item/1">
+            <button type="button" onClick={() => setIsOpenCart(!isOpenCart)}>
               <AiOutlineShoppingCart size={35} color="#fff" />
-            </Link>
+            </button>
           </li>
           <li>
             <img
