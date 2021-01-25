@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import InputIcon from "../Input";
 
 const Header = ({ isOpenCart, setIsOpenCart }) => {
@@ -10,15 +10,12 @@ const Header = ({ isOpenCart, setIsOpenCart }) => {
           <Link to="/" className="header-logo">
             <span>PokéStore.</span>
           </Link>
-          <InputIcon />
+          <span className="container-input">
+            <InputIcon />
+          </span>
         </div>
 
         <ul className="header-right">
-          <li>
-            <Link to="/">
-              <AiOutlineHeart size={35} color="#fff" />
-            </Link>
-          </li>
           <li>
             <button type="button" onClick={() => setIsOpenCart(!isOpenCart)}>
               <AiOutlineShoppingCart size={35} color="#fff" />
@@ -33,6 +30,9 @@ const Header = ({ isOpenCart, setIsOpenCart }) => {
           </li>
         </ul>
       </div>
+      <span className="container-input-out">
+        <InputIcon />
+      </span>
     </header>
   );
 };

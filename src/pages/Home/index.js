@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import Card from "../../components/Card/index";
 import Button from "../../components/Button";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import ModalBuy from "../../components/ModalBuy";
 
-const Home = ({ cartData, setCartData }) => {
+const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
   const [data, setData] = useState(null);
   const [nextUrl, setNextUrl] = useState("");
   const [previousUrl, setPreviousUrl] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const amountOfItems = (id) =>
-    cartData.filter((item) => item.id === id).length;
+  const [modalBuy, setModalBuy] = useState(false);
+  function getTotal() {
+    if (cartData !== null);
+  }
 
   useEffect(() => {
+    getTotal();
     api
       .get(`pokemon`)
       .then((response) => {
@@ -88,10 +90,22 @@ const Home = ({ cartData, setCartData }) => {
         console.log(pokemon);
         if (pokemon.count <= 0) {
           removeFromCart(item);
+
+          let total = cartData.reduce(
+            (total, { price = 0, count }) => total + count * price,
+            0
+          );
+          setTotalPrice(total);
         } else {
-          item.count -= 2;
+          item.count -= 1;
+          let total = cartData.reduce(
+            (total, { price = 0, count }) => total + count * price,
+            0
+          );
+          setTotalPrice(total);
         }
         setCartData([...array]);
+        localStorage.setItem("cartData", JSON.stringify(cartData));
       }
     });
   }
@@ -106,73 +120,103 @@ const Home = ({ cartData, setCartData }) => {
         return currentCart;
       }
 
+      let total = cartData.reduce(
+        (total, { price = 0, count }) => total + count * price,
+        0
+      );
+      setTotalPrice(total);
+
       return [
         ...currentCart.slice(0, indexOfItemToRemove),
         ...currentCart.slice(indexOfItemToRemove + 1),
+        localStorage.setItem("cartData", JSON.stringify(cartData)),
       ];
     });
   };
 
   return (
-    <main className="main">
-      <div className="main-content">
-        <h1 className="title">Our Pokémon</h1>
-        <section>
-          <div className="cards">
-            {data === null
-              ? null
-              : data.map((item) => (
-                  <Card key={item.name} data={item} addCart={addCart} />
-                ))}
-          </div>
-          <div className="side-cart">
-            <div className="side-cart-header">
-              <AiOutlineShoppingCart size={20} color="#cd121f" />
-              <h1>Carrinho</h1>
+    <>
+      <ModalBuy
+        modalBuy={modalBuy}
+        setModalBuy={setModalBuy}
+        totalPrice={totalPrice}
+      />
+      <main className="main">
+        <div className="main-content">
+          <h1 className="title">Our Pokémon</h1>
+          <section>
+            <div className="cards">
+              {data === null
+                ? null
+                : data.map((item) => (
+                    <Card key={item.name} data={item} addCart={addCart} />
+                  ))}
             </div>
-            {cartData !== null
-              ? cartData.map((item) => (
-                  <div className="cart-item" key={item.id}>
-                    <img src={item.img} alt={item.name} />
-                    <div className="cart-item-info">
-                      <h3>{item.name}</h3>
-                      <div>
-                        {item.types.map((type) => (
-                          <span key={type.type.name}>{type.type.name}</span>
-                        ))}
+            <div className="side-cart">
+              <div className="side-cart-header">
+                <AiOutlineShoppingCart size={20} color="#cd121f" />
+                <h1>Carrinho</h1>
+              </div>
+              {cartData !== null
+                ? cartData.map((item) => (
+                    <div className="cart-item" key={item.id}>
+                      <img src={item.img} alt={item.name} />
+                      <div className="cart-item-info">
+                        <h3>{item.name}</h3>
+                        <div>
+                          {item.types.map((type) => (
+                            <span key={type.type.name}>{type.type.name}</span>
+                          ))}
+                        </div>
+                        {/*  <button onClick={() => itemQuantity(item)}>--</button> */}
+                        <span>
+                          {item.count} x R${item.price}
+                        </span>
+                        <span className="cart-item-remove">
+                          <Button
+                            label={<IoIosClose color="#fff" size={35} />}
+                            onClick={() => removeFromCart(item)}
+                            type="shortIcon"
+                            disabled={false}
+                          />
+                        </span>
                       </div>
-                      <button onClick={() => itemQuantity(item)}>--</button>
-                      <span>
-                        {item.count} x R${item.price}
-                      </span>
-                      <button onClick={() => removeFromCart(item)}> X </button>
                     </div>
-                  </div>
-                ))
-              : null}
-            <div className="side-cart-price">
-              <span>Total:</span> <h3>R${totalPrice}</h3>
+                  ))
+                : null}
+              <div className="side-cart-price">
+                <span>Total:</span> <h3>R${totalPrice}</h3>
+              </div>
+              <Button
+                label="Finalizar"
+                onClick={() => {
+                  localStorage.clear();
+                  setCartData([]);
+                  setTotalPrice(0);
+                  setModalBuy(true);
+                }}
+                type="primmary"
+              />
             </div>
-            <Button label="Finalizar" onClick={() => null} type="primmary" />
-          </div>
-        </section>
+          </section>
 
-        <section className="main-buttons">
-          <Button
-            label={<IoIosArrowBack color="#fff" size={24} />}
-            onClick={() => getPreviousData()}
-            type="shortIcon"
-            disabled={previousUrl === null ? true : false}
-          />
-          <Button
-            label={<IoIosArrowForward color="#fff" size={24} />}
-            onClick={() => getNextData()}
-            type="shortIcon"
-            disabled={false}
-          />
-        </section>
-      </div>
-    </main>
+          <section className="main-buttons">
+            <Button
+              label={<IoIosArrowBack color="#fff" size={24} />}
+              onClick={() => getPreviousData()}
+              type="shortIcon"
+              disabled={previousUrl === null ? true : false}
+            />
+            <Button
+              label={<IoIosArrowForward color="#fff" size={24} />}
+              onClick={() => getNextData()}
+              type="shortIcon"
+              disabled={false}
+            />
+          </section>
+        </div>
+      </main>
+    </>
   );
 };
 

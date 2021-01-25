@@ -1,7 +1,7 @@
 .main {
   width: 100%;
+  padding: 125px 50px 50px;
 
-  padding: 125px 100px 0;
   text-align: center;
 
   &-content {
@@ -28,17 +28,29 @@
     width: 100%;
     flex: 1 1 0px;
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
     grid-template-rows: auto;
     gap: 20px;
+
+    @media (max-width: 950px) {
+      grid-template-columns: repeat(2, minmax(200px, 1fr));
+    }
+
+    @media (max-width: 500px) {
+      grid-template-columns: repeat(1, minmax(200px, 1fr));
+    }
   }
 
   .side-cart {
+    min-width: 320px;
     width: 360px;
     padding: 0 30px 30px;
     margin-left: 20px;
     background-color: $GRAY-2;
 
+    @media (max-width: 800px) {
+      display: none;
+    }
     &-header {
       width: 100%;
       margin: 10px 0;
@@ -69,6 +81,7 @@
   }
 
   .cart-item {
+    position: relative;
     cursor: pointer;
     width: 100%;
     height: 120px;
@@ -116,6 +129,12 @@
         font-weight: 600;
         color: $BLACK;
         text-transform: capitalize;
+      }
+
+      .cart-item-remove {
+        position: absolute;
+        top: -20px;
+        right: -15px;
       }
     }
   }

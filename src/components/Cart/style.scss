@@ -14,11 +14,13 @@
 .cart-container {
   height: 100%;
   width: 30%;
+  min-width: 300px;
   background-color: $WHITE;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  animation: leftCart 250ms ease-out;
 }
 
 .cart-header {
@@ -31,5 +33,15 @@
 
   span {
     color: $BLACK;
+  }
+}
+
+@keyframes leftCart {
+  from {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  to {
+    opacity: 1;
   }
 }
