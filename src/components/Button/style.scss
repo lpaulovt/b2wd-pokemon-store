@@ -11,19 +11,20 @@
     height: 50px;
     width: 100%;
     max-width: 245px;
-    background-color: $RED;
-    color: $WHITE;
+    background-color: var(--RED);
+    color: var(--WHITE);
   }
 
   &.shortIcon {
     height: 48px;
     width: 48px;
     margin-right: 15px;
-    background-color: $RED;
+    background-color: var(--RED);
 
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--WHITE);
   }
 
   &:hover {

@@ -11,14 +11,21 @@
 }
 
 /*  APP COLOR SCHEMA */
-$WHITE: #fff;
-$BLACK: #12121d;
-$GRAY: #d0d0d1;
-$GRAY-2: #f4f5f7;
-$RED: #cd121f;
-$BLUE: #0008c7;
-$GREEN: #42d70d;
+:root {
+  --WHITE: #fff;
+  --BLACK: #12121d;
+  --GRAY: #d0d0d1;
+  --GRAY-2: #f4f5f7;
+  --RED: #cd121f;
+}
 
+.water {
+  --WHITE: #fff;
+  --BLACK: #12121d;
+  --GRAY: #d0d0d1;
+  --GRAY-2: #f4f5f7;
+  --RED: #0008c7;
+}
 /* MAX WIDTH*/
 $MAXWIDTH: 1250px;
 

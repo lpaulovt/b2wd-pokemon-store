@@ -10,32 +10,37 @@ function App() {
   const [isOpenCart, setIsOpenCart] = useState(false);
   const [cartData, setCartData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [switchStore, setSwitchStore] = useState(false);
 
-  /*   setInterval(() => {
-    setTotalPrice(
-      cartData.reduce((total, { price = 0, count }) => total + count * price, 0)
-    );
-  }, 10);
- */
   useEffect(() => {
     setCartData(JSON.parse(localStorage.getItem("cartData")));
+    setTotalPrice(JSON.parse(localStorage.getItem("totalPrice")));
   }, []);
 
   return (
-    <Router>
-      <Header isOpenCart={isOpenCart} setIsOpenCart={setIsOpenCart} />
-      <Routes
-        cartData={cartData}
-        setCartData={setCartData}
-        totalPrice={totalPrice}
-        setTotalPrice={setTotalPrice}
-      />
-      <Cart
-        isOpenCart={isOpenCart}
-        setIsOpenCart={setIsOpenCart}
-        cartData={cartData}
-      />
-    </Router>
+    <div className={switchStore ? `water` : null}>
+      <Router>
+        <Header
+          isOpenCart={isOpenCart}
+          setIsOpenCart={setIsOpenCart}
+          switchStore={switchStore}
+          setSwitchStore={setSwitchStore}
+        />
+        <Routes
+          cartData={cartData}
+          setCartData={setCartData}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          switchStore={switchStore}
+          setSwitchStore={setSwitchStore}
+        />
+        <Cart
+          isOpenCart={isOpenCart}
+          setIsOpenCart={setIsOpenCart}
+          cartData={cartData}
+        />
+      </Router>
+    </div>
   );
 }
 

@@ -2,7 +2,14 @@ import { Switch, Route } from "react-router-dom";
 import Home from "../pages/Home/index";
 import Item from "../pages/Item/index";
 
-const Routes = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
+const Routes = ({
+  cartData,
+  setCartData,
+  totalPrice,
+  setTotalPrice,
+  switchStore,
+  setSwitchStore,
+}) => {
   return (
     <Switch>
       <Route exact path="/">
@@ -11,6 +18,8 @@ const Routes = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
           setCartData={setCartData}
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
+          switchStore={switchStore}
+          setSwitchStore={setSwitchStore}
         />
       </Route>
       <Route path="/item/1">

@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba($BLACK, 0.67);
+  background-color: rgba(#000, 0.67);
 
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@
   height: 100%;
   max-height: 400px;
   margin: 20px;
-  background-color: $WHITE;
+  background-color: var(--WHITE);
 
   display: flex;
   flex-direction: column;

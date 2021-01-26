@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import InputIcon from "../Input";
 
-const Header = ({ isOpenCart, setIsOpenCart }) => {
+const Header = ({ isOpenCart, setIsOpenCart, switchStore, setSwitchStore }) => {
   return (
     <header className="header">
       <div className="header-content">
         <div className="header-left">
-          <Link to="/" className="header-logo">
-            <span>PokéStore.</span>
-          </Link>
+          <button
+            onClick={() => setSwitchStore(!switchStore)}
+            className="header-logo"
+          >
+            <span>{switchStore ? "WaterStore." : "FireStore."}</span>
+          </button>
           <span className="container-input">
             <InputIcon />
           </span>

@@ -3,19 +3,19 @@
   width: 100%;
   padding: 12px;
 
-  background-color: $WHITE;
+  background-color: var(--WHITE);
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
   input {
     margin-left: 12px;
-    color: $GRAY;
+    color: var(--GRAY);
     outline: none;
     border: none;
 
     &::placeholder {
-      color: $GRAY;
+      color: var(--GRAY);
     }
   }
 }

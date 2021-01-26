@@ -4,7 +4,7 @@ import Button from "../Button";
 import getRandomInteger from "../../utils/getRandomInteger";
 
 const Card = ({ data, addCart }) => {
-  const url = data.url;
+  const url = data;
   const [pokemon, setPokemon] = useState(null);
   const [price, setPrice] = useState(0);
 

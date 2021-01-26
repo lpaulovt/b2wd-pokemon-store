@@ -2,52 +2,54 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import Card from "../../components/Card/index";
 import Button from "../../components/Button";
-import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from "react-icons/io";
+import { IoIosClose } from "react-icons/io";
+import { GoPlus, GoDash } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ModalBuy from "../../components/ModalBuy";
 
-const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
-  const [data, setData] = useState(null);
-  const [nextUrl, setNextUrl] = useState("");
-  const [previousUrl, setPreviousUrl] = useState("");
+const Home = ({
+  cartData,
+  setCartData,
+  totalPrice,
+  setTotalPrice,
+  switchStore,
+  setSwitchStore,
+}) => {
+  const [data, setData] = useState([]);
   const [modalBuy, setModalBuy] = useState(false);
-  function getTotal() {
-    if (cartData !== null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentData = data.slice(indexOfFirstPost, indexOfLastPost);
+
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(data.length / postsPerPage); i++) {
+    pageNumbers.push(i);
   }
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   useEffect(() => {
-    getTotal();
-    api
-      .get(`pokemon`)
-      .then((response) => {
-        setData(response.data.results);
-        setNextUrl(response.data.next);
-        setPreviousUrl(response.data.previous);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  function getNextData() {
-    api
-      .get(`pokemon${nextUrl.substring(33)}`)
-      .then((response) => {
-        setData(response.data.results);
-        setNextUrl(response.data.next);
-        setPreviousUrl(response.data.previous);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  function getPreviousData() {
-    api
-      .get(`pokemon${previousUrl.substring(33)}`)
-      .then((response) => {
-        setData(response.data.results);
-        setNextUrl(response.data.next);
-        setPreviousUrl(response.data.previous);
-      })
-      .catch((error) => console.log(error));
-  }
+    if (switchStore !== true) {
+      api
+        .get(`type/10`)
+        .then((response) => {
+          console.log(response.data.pokemon);
+          setData(response.data.pokemon);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      api
+        .get(`type/11`)
+        .then((response) => {
+          console.log(response.data.pokemon);
+          setData(response.data.pokemon);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [switchStore]);
 
   function addCart(newItem) {
     let array = cartData || [];
@@ -73,65 +75,90 @@ const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
         0
       );
       setTotalPrice(total);
+      localStorage.setItem("totalPrice", JSON.stringify(total));
     } else {
       setTotalPrice(newItem.price);
+      localStorage.setItem("totalPrice", JSON.stringify(newItem.price));
     }
     setCartData([...array]);
 
     localStorage.setItem("cartData", JSON.stringify(cartData));
   }
 
-  function itemQuantity(item) {
-    let array = cartData || [];
-    console.log("entrou");
-    array.forEach((pokemon) => {
-      console.log(item.id);
-      if (pokemon.id === item.id) {
-        console.log(pokemon);
-        if (pokemon.count <= 0) {
-          removeFromCart(item);
+  function increment(item) {
+    const array = cartData;
 
-          let total = cartData.reduce(
-            (total, { price = 0, count }) => total + count * price,
-            0
-          );
-          setTotalPrice(total);
-        } else {
-          item.count -= 1;
-          let total = cartData.reduce(
-            (total, { price = 0, count }) => total + count * price,
-            0
-          );
-          setTotalPrice(total);
-        }
+    array.forEach((cart) => {
+      if (cart.id === item.id) {
+        cart.count += 1;
         setCartData([...array]);
         localStorage.setItem("cartData", JSON.stringify(cartData));
+        setTotalPrice(
+          array.reduce(
+            (total, { price = 0, count }) => total + count * price,
+            0
+          )
+        );
+        return localStorage.setItem(
+          "totalPrice",
+          JSON.stringify(
+            array.reduce(
+              (total, { price = 0, count }) => total + count * price,
+              0
+            )
+          )
+        );
+      }
+    });
+  }
+
+  function decrement(item) {
+    const array = cartData;
+
+    array.forEach((cart) => {
+      if (cart.id === item.id) {
+        cart.count -= 1;
+        setCartData([...array]);
+        localStorage.setItem("cartData", JSON.stringify(cartData));
+        setTotalPrice(
+          array.reduce(
+            (total, { price = 0, count }) => total + count * price,
+            0
+          )
+        );
+        return localStorage.setItem(
+          "totalPrice",
+          JSON.stringify(
+            array.reduce(
+              (total, { price = 0, count }) => total + count * price,
+              0
+            )
+          )
+        );
       }
     });
   }
 
   const removeFromCart = (item) => {
-    setCartData((currentCart) => {
-      const indexOfItemToRemove = currentCart.findIndex(
-        (cartItem) => cartItem.id === item.id
-      );
+    setCartData(cartData.filter((cart) => cart.id !== item.id));
+    setTotalPrice(
+      cartData
+        .filter((cart) => cart.id !== item.id)
+        .reduce((total, { price = 0, count }) => total + count * price, 0)
+    );
+    localStorage.setItem(
+      "cartData",
+      JSON.stringify(cartData.filter((cart) => cart.id !== item.id))
+    );
 
-      if (indexOfItemToRemove === -1) {
-        return currentCart;
-      }
-
-      let total = cartData.reduce(
-        (total, { price = 0, count }) => total + count * price,
-        0
-      );
-      setTotalPrice(total);
-
-      return [
-        ...currentCart.slice(0, indexOfItemToRemove),
-        ...currentCart.slice(indexOfItemToRemove + 1),
-        localStorage.setItem("cartData", JSON.stringify(cartData)),
-      ];
-    });
+    return localStorage.setItem(
+      "totalPrice",
+      JSON.stringify(
+        cartData
+          .filter((cart) => cart.id !== item.id)
+          .reduce((total, { price = 0, count }) => total + count * price, 0)
+      )
+    );
   };
 
   return (
@@ -146,15 +173,22 @@ const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
           <h1 className="title">Our Pokémon</h1>
           <section>
             <div className="cards">
-              {data === null
+              {currentData === null
                 ? null
-                : data.map((item) => (
-                    <Card key={item.name} data={item} addCart={addCart} />
+                : currentData.map((item) => (
+                    <Card
+                      key={item.pokemon.name}
+                      data={item.pokemon.url}
+                      addCart={addCart}
+                    />
                   ))}
             </div>
             <div className="side-cart">
               <div className="side-cart-header">
-                <AiOutlineShoppingCart size={20} color="#cd121f" />
+                <AiOutlineShoppingCart
+                  size={20}
+                  color={switchStore ? "#0008c7" : "#cd121f"}
+                />
                 <h1>Carrinho</h1>
               </div>
               {cartData !== null
@@ -168,17 +202,20 @@ const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
                             <span key={type.type.name}>{type.type.name}</span>
                           ))}
                         </div>
-                        {/*  <button onClick={() => itemQuantity(item)}>--</button> */}
+                        <div className="cart-item-btns">
+                          <button onClick={() => decrement(item)}>
+                            <GoDash size={20} color="#FFF" />
+                          </button>
+
+                          <button onClick={() => increment(item)}>
+                            <GoPlus size={20} color="#FFF" />
+                          </button>
+                          <button onClick={() => removeFromCart(item)}>
+                            <IoIosClose size={30} color="#FFF" />
+                          </button>
+                        </div>
                         <span>
                           {item.count} x R${item.price}
-                        </span>
-                        <span className="cart-item-remove">
-                          <Button
-                            label={<IoIosClose color="#fff" size={35} />}
-                            onClick={() => removeFromCart(item)}
-                            type="shortIcon"
-                            disabled={false}
-                          />
                         </span>
                       </div>
                     </div>
@@ -201,18 +238,13 @@ const Home = ({ cartData, setCartData, totalPrice, setTotalPrice }) => {
           </section>
 
           <section className="main-buttons">
-            <Button
-              label={<IoIosArrowBack color="#fff" size={24} />}
-              onClick={() => getPreviousData()}
-              type="shortIcon"
-              disabled={previousUrl === null ? true : false}
-            />
-            <Button
-              label={<IoIosArrowForward color="#fff" size={24} />}
-              onClick={() => getNextData()}
-              type="shortIcon"
-              disabled={false}
-            />
+            {pageNumbers.map((number) => (
+              <Button
+                label={number}
+                onClick={() => paginate(number)}
+                type="shortIcon"
+              />
+            ))}
           </section>
         </div>
       </main>
