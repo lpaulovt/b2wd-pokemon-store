@@ -44,24 +44,26 @@ const Cart = ({
 
     array.forEach((cart) => {
       if (cart.id === item.id) {
-        cart.count -= 1;
-        setCartData([...array]);
-        localStorage.setItem("cartData", JSON.stringify(cartData));
-        setTotalPrice(
-          array.reduce(
-            (total, { price = 0, count }) => total + count * price,
-            0
-          )
-        );
-        return localStorage.setItem(
-          "totalPrice",
-          JSON.stringify(
+        if (cart.count > 1) {
+          cart.count -= 1;
+          setCartData([...array]);
+          localStorage.setItem("cartData", JSON.stringify(cartData));
+          setTotalPrice(
             array.reduce(
               (total, { price = 0, count }) => total + count * price,
               0
             )
-          )
-        );
+          );
+          return localStorage.setItem(
+            "totalPrice",
+            JSON.stringify(
+              array.reduce(
+                (total, { price = 0, count }) => total + count * price,
+                0
+              )
+            )
+          );
+        }
       }
     });
   }
