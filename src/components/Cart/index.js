@@ -11,6 +11,7 @@ const Cart = ({
   setCartData,
   totalPrice,
   setTotalPrice,
+  setModalBuy,
 }) => {
   function increment(item) {
     const array = cartData;
@@ -146,7 +147,10 @@ const Cart = ({
               </div>
               <Button
                 label="Finalizar"
-                onClick={() => setIsOpenCart(false)}
+                onClick={() => {
+                  setIsOpenCart(false);
+                  setModalBuy(true);
+                }}
                 type="primmary"
               />
             </>

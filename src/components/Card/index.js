@@ -10,7 +10,11 @@ const Card = ({ data, addCart }) => {
 
   useEffect(() => {
     api
-      .get(`pokemon/${url.substring(33)}`)
+      .get(`pokemon/${url.substring(34)}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "https://pokestore-b2wd.netlify.app/",
+        },
+      })
       .then((response) => {
         setPokemon(response.data);
       })

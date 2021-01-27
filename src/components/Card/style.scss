@@ -3,6 +3,8 @@
   min-height: 445px;
   padding-top: 20%;
   background-color: var(--GRAY-2);
+  border-radius: 5px;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
@@ -68,14 +70,16 @@
     padding: 20px;
     background-color: rgba(#000, 0.67);
 
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
   }
 
   &:hover {
     .card-overlay {
-      display: flex;
+      opacity: 1;
     }
   }
 }
