@@ -14,13 +14,12 @@ const Home = ({
   totalPrice,
   setTotalPrice,
   switchStore,
-  setSwitchStore,
   searchPokemon,
-  setSearchPokemon,
+  modalBuy,
+  setModalBuy,
 }) => {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-  const [modalBuy, setModalBuy] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;

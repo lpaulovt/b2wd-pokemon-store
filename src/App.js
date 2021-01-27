@@ -14,6 +14,7 @@ function App() {
   const [searchPokemon, setSearchPokemon] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [switchStore, setSwitchStore] = useState(false);
+  const [modalBuy, setModalBuy] = useState(false);
 
   useEffect(() => {
     setCartData(JSON.parse(localStorage.getItem("cartData")));
@@ -42,6 +43,8 @@ function App() {
           setSwitchStore={setSwitchStore}
           searchPokemon={searchPokemon}
           setSearchPokemon={setSearchPokemon}
+          modalBuy={modalBuy}
+          setModalBuy={setModalBuy}
         />
         <Cart
           isOpenCart={isOpenCart}
@@ -51,6 +54,7 @@ function App() {
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
           switchStore={switchStore}
+          setModalBuy={setModalBuy}
         />
         <Button
           label={<FaStoreAlt color="#fff" size={30} />}

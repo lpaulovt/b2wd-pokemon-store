@@ -11,6 +11,8 @@ const Routes = ({
   setTotalPrice,
   switchStore,
   setSwitchStore,
+  modalBuy,
+  setModalBuy,
 }) => {
   return (
     <Switch>
@@ -24,6 +26,8 @@ const Routes = ({
           setSwitchStore={setSwitchStore}
           searchPokemon={searchPokemon}
           setSearchPokemon={setSearchPokemon}
+          modalBuy={modalBuy}
+          setModalBuy={setModalBuy}
         />
       </Route>
       <Route path="/item/1">
