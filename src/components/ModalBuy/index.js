@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosClose } from "react-icons/io";
 import Button from "../Button";
-const ModalBuy = ({ modalBuy, setModalBuy, totalPrice }) => {
+const ModalBuy = ({ modalBuy, setModalBuy, totalPrice, onPress }) => {
   if (modalBuy === true) {
     return (
       <div className="modal-buy-overlay">
@@ -9,7 +9,10 @@ const ModalBuy = ({ modalBuy, setModalBuy, totalPrice }) => {
           <span className="modal-buy-btn">
             <Button
               label={<IoIosClose color="#fff" size={24} />}
-              onClick={() => setModalBuy(false)}
+              onClick={() => {
+                setModalBuy(false);
+                onPress();
+              }}
               type="shortIcon"
               disabled={false}
             />

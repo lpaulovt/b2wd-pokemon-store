@@ -5,6 +5,8 @@ import Item from "../pages/Item/index";
 const Routes = ({
   cartData,
   setCartData,
+  searchPokemon,
+  setSearchPokemon,
   totalPrice,
   setTotalPrice,
   switchStore,
@@ -20,6 +22,8 @@ const Routes = ({
           setTotalPrice={setTotalPrice}
           switchStore={switchStore}
           setSwitchStore={setSwitchStore}
+          searchPokemon={searchPokemon}
+          setSearchPokemon={setSearchPokemon}
         />
       </Route>
       <Route path="/item/1">

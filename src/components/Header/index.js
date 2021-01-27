@@ -1,26 +1,52 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiShoppingBag } from "react-icons/fi";
 import InputIcon from "../Input";
 
-const Header = ({ isOpenCart, setIsOpenCart, switchStore, setSwitchStore }) => {
+const Header = ({
+  isOpenCart,
+  setIsOpenCart,
+  switchStore,
+  setSwitchStore,
+  searchPokemon,
+  setSearchPokemon,
+  setCartData,
+  setTotalPrice,
+}) => {
   return (
     <header className="header">
       <div className="header-content">
         <div className="header-left">
           <button
-            onClick={() => setSwitchStore(!switchStore)}
+            onClick={() => {
+              localStorage.clear();
+              setCartData(null);
+              setTotalPrice(0);
+              setSwitchStore(!switchStore);
+            }}
             className="header-logo"
           >
             <span>{switchStore ? "WaterStore." : "FireStore."}</span>
           </button>
           <span className="container-input">
-            <InputIcon />
+            <InputIcon
+              value={searchPokemon}
+              setValue={setSearchPokemon}
+              placeholder={
+                switchStore
+                  ? "pesquisa aqui, é rapidinho ;)"
+                  : "Procurar Pokémon "
+              }
+            />
           </span>
         </div>
-
         <ul className="header-right">
           <li>
             <button type="button" onClick={() => setIsOpenCart(!isOpenCart)}>
-              <AiOutlineShoppingCart size={35} color="#fff" />
+              {switchStore ? (
+                <FiShoppingBag size={35} color="#fff" />
+              ) : (
+                <AiOutlineShoppingCart size={35} color="#fff" />
+              )}
             </button>
           </li>
           <li>
@@ -33,7 +59,13 @@ const Header = ({ isOpenCart, setIsOpenCart, switchStore, setSwitchStore }) => {
         </ul>
       </div>
       <span className="container-input-out">
-        <InputIcon />
+        <InputIcon
+          value={searchPokemon}
+          setValue={setSearchPokemon}
+          placeholder={
+            switchStore ? "pesquisa aqui, é rapidinho ;)" : "Procurar Pokémon "
+          }
+        />
       </span>
     </header>
   );

@@ -5,10 +5,13 @@ import Cart from "./components/Cart";
 import Routes from "./routes";
 
 import "./global.scss";
+import { FaStoreAlt } from "react-icons/fa";
+import Button from "./components/Button";
 
 function App() {
   const [isOpenCart, setIsOpenCart] = useState(false);
   const [cartData, setCartData] = useState([]);
+  const [searchPokemon, setSearchPokemon] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [switchStore, setSwitchStore] = useState(false);
 
@@ -25,6 +28,10 @@ function App() {
           setIsOpenCart={setIsOpenCart}
           switchStore={switchStore}
           setSwitchStore={setSwitchStore}
+          searchPokemon={searchPokemon}
+          setSearchPokemon={setSearchPokemon}
+          setCartData={setCartData}
+          setTotalPrice={setTotalPrice}
         />
         <Routes
           cartData={cartData}
@@ -33,11 +40,22 @@ function App() {
           setTotalPrice={setTotalPrice}
           switchStore={switchStore}
           setSwitchStore={setSwitchStore}
+          searchPokemon={searchPokemon}
+          setSearchPokemon={setSearchPokemon}
         />
         <Cart
           isOpenCart={isOpenCart}
           setIsOpenCart={setIsOpenCart}
           cartData={cartData}
+          setCartData={setCartData}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          switchStore={switchStore}
+        />
+        <Button
+          label={<FaStoreAlt color="#fff" size={30} />}
+          onClick={() => setSwitchStore(!switchStore)}
+          type="floatingIcon"
         />
       </Router>
     </div>

@@ -3,6 +3,7 @@ import api from "../../services/api";
 import Card from "../../components/Card/index";
 import Button from "../../components/Button";
 import { IoIosClose } from "react-icons/io";
+import { FiShoppingBag } from "react-icons/fi";
 import { GoPlus, GoDash } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ModalBuy from "../../components/ModalBuy";
@@ -14,29 +15,33 @@ const Home = ({
   setTotalPrice,
   switchStore,
   setSwitchStore,
+  searchPokemon,
+  setSearchPokemon,
 }) => {
   const [data, setData] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
   const [modalBuy, setModalBuy] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
 
-  const indexOfLastPost = currentPage * postsPerPage;
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+
+  const indexOfLastPost = currentPage * postsPerPage || 10;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentData = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentDat = currentData.slice(indexOfFirstPost, indexOfLastPost);
 
   const pageNumbers = [];
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   for (let i = 1; i <= Math.ceil(data.length / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   useEffect(() => {
     if (switchStore !== true) {
       api
         .get(`type/10`)
         .then((response) => {
-          console.log(response.data.pokemon);
+          setCurrentPage(response.data.pokemon);
           setData(response.data.pokemon);
         })
         .catch((error) => console.log(error));
@@ -44,12 +49,19 @@ const Home = ({
       api
         .get(`type/11`)
         .then((response) => {
-          console.log(response.data.pokemon);
           setData(response.data.pokemon);
+          setCurrentPage(response.data.pokemon);
         })
         .catch((error) => console.log(error));
     }
   }, [switchStore]);
+
+  useEffect(() => {
+    const resultados = data.filter((item) =>
+      item.pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase())
+    );
+    setCurrentData(resultados);
+  }, [searchPokemon, data]);
 
   function addCart(newItem) {
     let array = cartData || [];
@@ -167,15 +179,19 @@ const Home = ({
         modalBuy={modalBuy}
         setModalBuy={setModalBuy}
         totalPrice={totalPrice}
+        onPress={() => {
+          localStorage.clear();
+          setCartData([]);
+          setTotalPrice(0);
+        }}
       />
       <main className="main">
         <div className="main-content">
-          <h1 className="title">Our Pokémon</h1>
           <section>
             <div className="cards">
-              {currentData === null
+              {currentDat === null
                 ? null
-                : currentData.map((item) => (
+                : currentDat.map((item) => (
                     <Card
                       key={item.pokemon.name}
                       data={item.pokemon.url}
@@ -185,18 +201,20 @@ const Home = ({
             </div>
             <div className="side-cart">
               <div className="side-cart-header">
-                <AiOutlineShoppingCart
-                  size={20}
-                  color={switchStore ? "#0008c7" : "#cd121f"}
-                />
-                <h1>Carrinho</h1>
+                {switchStore ? (
+                  <FiShoppingBag size={20} color="#0008c7" />
+                ) : (
+                  <AiOutlineShoppingCart size={20} color="#cd121f" />
+                )}
+                <h1>{switchStore ? "Sacola" : "Carrinho"}</h1>
               </div>
+              {cartData !== null ? null : <h4>Seu carrinho está vazio!</h4>}
               {cartData !== null
                 ? cartData.map((item) => (
                     <div className="cart-item" key={item.id}>
                       <img src={item.img} alt={item.name} />
                       <div className="cart-item-info">
-                        <h3>{item.name}</h3>
+                        <h3>{item.name.slice(0, 20)}</h3>
                         <div>
                           {item.types.map((type) => (
                             <span key={type.type.name}>{type.type.name}</span>
@@ -221,19 +239,22 @@ const Home = ({
                     </div>
                   ))
                 : null}
-              <div className="side-cart-price">
-                <span>Total:</span> <h3>R${totalPrice}</h3>
-              </div>
-              <Button
-                label="Finalizar"
-                onClick={() => {
-                  localStorage.clear();
-                  setCartData([]);
-                  setTotalPrice(0);
-                  setModalBuy(true);
-                }}
-                type="primmary"
-              />
+
+              {cartData === null ? null : (
+                <>
+                  <div className="side-cart-price">
+                    <span>Total:</span> <h3>R${totalPrice || 0}</h3>
+                  </div>
+
+                  <Button
+                    label="Finalizar"
+                    onClick={() => {
+                      setModalBuy(true);
+                    }}
+                    type="primmary"
+                  />
+                </>
+              )}
             </div>
           </section>
 
@@ -243,6 +264,7 @@ const Home = ({
                 label={number}
                 onClick={() => paginate(number)}
                 type="shortIcon"
+                key={number}
               />
             ))}
           </section>

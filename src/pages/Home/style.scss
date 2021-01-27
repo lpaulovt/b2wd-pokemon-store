@@ -43,6 +43,7 @@
 
   .side-cart {
     min-width: 320px;
+    height: auto;
     width: 360px;
     padding: 0 30px 30px;
     margin-left: 20px;
@@ -77,6 +78,10 @@
         font-weight: 500;
         color: rgba(var(--BLACK), 0.6);
       }
+    }
+
+    h4 {
+      margin: 20px 0;
     }
   }
 
