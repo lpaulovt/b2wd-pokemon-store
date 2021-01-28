@@ -40,7 +40,7 @@
 
 ## :rocket: Technologies
 
-This project was developed for front-end challenge of the B2W Digital with the following technologies:
+This project was developed for [front-end challenge of the B2W Digital](https://github.com/b2wdigital/desafio-loja-pokemon/tree/junior) with the following technologies:
 
 - [ReactJS](https://reactjs.org/)
 - [react-router-dom](https://github.com/ReactTraining/react-router)
@@ -52,7 +52,7 @@ This project was developed for front-end challenge of the B2W Digital with the f
 ### 📦 Install
 
 ```
-$ git clone https://github.com/guilouro/simple-nextjs-quick-start.git
+$ git clone https://github.com/lpaulovt/b2wd-pokemon-store
 
 $ npm install
 ```
@@ -73,13 +73,12 @@ $ npm build
 
 ## :memo: License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/lpaulovt/bancointer/blob/master/LICENSE) for more information.
+This project is under the MIT license. See the [LICENSE](https://github.com/lpaulovt/b2wd-pokemon-store/blob/master/LICENSE) for more information.
 
 ---
 
 Made with ♥ by Paulo Lopes :wave: [Get in touch!](https://www.linkedin.com/in/lpaulovt/)
 
-[ts]: https://www.typescriptlang.org
 [vscode]: https://code.visualstudio.com/
 [yarn]: https://yarnpkg.com/
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
