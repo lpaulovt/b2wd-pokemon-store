@@ -14,7 +14,6 @@
     <img alt="Repository issues" src="https://img.shields.io/github/issues/lpaulovt/b2wd-pokemon-store.svg">
   </a>
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/lpaulovt/b2wd-pokemon-store.svg">
 </p>
 
 <h4 align="center">
@@ -73,7 +72,7 @@ $ npm build
 
 ## :memo: License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/lpaulovt/b2wd-pokemon-store/blob/master/LICENSE) for more information.
+This project is under the MIT license. See the [LICENSE](https://github.com/lpaulovt/b2wd-pokemon-store/blob/main/LICENSE) for more information.
 
 ---
 
