@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+<h1 align="center">
+   Challenge Front-end - B2W Digital 
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lpaulovt/b2wd-pokemon-store.svg">
 
-## Available Scripts
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/lpaulovt/b2wd-pokemon-store.svg">
+  <a href="https://github.com/lpaulovt/b2wd-pokemon-store/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lpaulovt/b2wd-pokemon-store.svg">
+  </a>
 
-In the project directory, you can run:
+  <a href="https://github.com/lpaulovt/b2wd-pokemon-store/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/lpaulovt/b2wd-pokemon-store.svg">
+  </a>
 
-### `yarn start`
+  <img alt="GitHub" src="https://img.shields.io/github/license/lpaulovt/b2wd-pokemon-store.svg">
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h4 align="center">
+  This is a E-commerce of Pokémon.
+</h4>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#📦-install">Install</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#📦-install">How to use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+</p>
 
-### `yarn test`
+![App Screenshot](https://i.ibb.co/xjLNYQD/Shot-HD-Final.jpg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![App Screenshot](https://i.ibb.co/ZHXzv27/Shot-HD-Final-Mobile.jpg)
 
-### `yarn build`
+<p align="center">
+  <a href="https://pokestore-b2wd.netlify.app/" target="_blank">
+    <img alt="Demo on Netlify" src="https://res.cloudinary.com/lukemorales/image/upload/v1599785319/readme_logos/demo_on_netlify_umjmch.png">
+  </a>
+</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## :rocket: Technologies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project was developed for front-end challenge of the B2W Digital with the following technologies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [ReactJS](https://reactjs.org/)
+- [react-router-dom](https://github.com/ReactTraining/react-router)
+- [Sass]()
+- [react-icons]()
 
-### `yarn eject`
+- [VS Code][vscode] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 📦 Install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+$ git clone https://github.com/guilouro/simple-nextjs-quick-start.git
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+$ npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 🔨 How to use
 
-## Learn More
+Runs next which starts React.js in development mode
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+$ npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Runs next build which builds the application for production usage
 
-### Code Splitting
+```bash
+$ npm build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## :memo: License
 
-### Analyzing the Bundle Size
+This project is under the MIT license. See the [LICENSE](https://github.com/lpaulovt/bancointer/blob/master/LICENSE) for more information.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+Made with ♥ by Paulo Lopes :wave: [Get in touch!](https://www.linkedin.com/in/lpaulovt/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[ts]: https://www.typescriptlang.org
+[vscode]: https://code.visualstudio.com/
+[yarn]: https://yarnpkg.com/
+[vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
