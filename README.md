@@ -1,5 +1,5 @@
 <h1 align="center">
-   Challenge Front-end - B2W Digital 
+  Front-end Challenge - B2W Digital 
 </h1>
 
 <p align="center">
