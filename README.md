@@ -1,5 +1,5 @@
 <h1 align="center">
-  Front-end Challenge - B2W Digital 
+  Front-end Challenge 
 </h1>
 
 <p align="center">
@@ -39,7 +39,7 @@
 
 ## :rocket: Technologies
 
-This project was developed for [front-end challenge of the B2W Digital](https://github.com/b2wdigital/desafio-loja-pokemon/tree/junior) with the following technologies:
+This project was developed with the following technologies:
 
 - [ReactJS](https://reactjs.org/)
 - [react-router-dom](https://github.com/ReactTraining/react-router)
